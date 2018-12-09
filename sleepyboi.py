@@ -22,7 +22,7 @@ formatter = logging.Formatter('%(asctime)s - %(name)s - %(levelname)s - %(messag
 handler.setFormatter(formatter)
 logger.addHandler(handler)
 
-lcddisplay = lcddriver.lcd()
+# lcddisplay = lcddriver.lcd()
 
 # pygame.mixer.init()
 
