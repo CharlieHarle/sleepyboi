@@ -3,8 +3,7 @@ import time
 import datetime
 import logging
 from pytz import timezone
-import pygame
-
+import subprocess
 # import RPi.GPIO as GPIO
 # import lcddriver
 
@@ -25,7 +24,7 @@ logger.addHandler(handler)
 
 lcddisplay = lcddriver.lcd()
 
-pygame.mixer.init()
+# pygame.mixer.init()
 
 # on/off
 # toggle noises
@@ -76,10 +75,16 @@ class Sleeper:
 
     def play(self, filename):
         full_path = TRACKLOCATION + filename
-        pygame.mixer.music.load(full_path)
-        pygame.mixer.music.play()
-        while pygame.mixer.music.get_busy() == True:
-            continue
+        print('starting track')
+        play_process = subprocess.Popen(['omxplayer', full_path],
+        print('playing track - pid={play_process}'.format(play_process))
+
+    # def play_with_pygame(self, filename):
+    #     full_path = TRACKLOCATION + filename
+    #     pygame.mixer.music.load(full_path)
+    #     pygame.mixer.music.play()
+    #     while pygame.mixer.music.get_busy() == True:
+    #         continue
 
 
 if __name__ == '__main__':
