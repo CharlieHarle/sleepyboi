@@ -76,7 +76,7 @@ class Sleeper:
     def play(self, filename):
         full_path = TRACKLOCATION + filename
         print('starting track')
-        play_process = subprocess.Popen(['omxplayer', full_path])
+        play_process = subprocess.Popen(['omxplayer', '--no-keys', full_path], stdin=subprocess.PIPE, stdout=subprocess.PIPE, stderr=subprocess.PIPE, close_fds=True)
         print('playing track - pid={}'.format(play_process))
 
     # def play_with_pygame(self, filename):
