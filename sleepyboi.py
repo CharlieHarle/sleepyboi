@@ -33,33 +33,19 @@ logger.addHandler(handler)
 TRACKLOCATION = 'tracks/'
 
 TRACK_NAMES = {
-
+    'Irish Coast': 'IrishCoast.mp3',
+    'Lake Life': 'LakeLife.mp3',
+    'Primeval Forest': 'PrimevalForest.mp3',
+    'Unreal Ocean': 'UnrealOcean.mp3'
 }
 
-TRACKS = [
-    {
-        'name': 'Irish Coast',
-        'filename':  'IrishCoast.mp3',
-    },
-    {
-        'name': 'Lake Life',
-        'filename':  'LakeLife.mp3',
-    },
-    {
-        'name': 'Primeval Forest',
-        'filename':  'PrimevalForest.mp3',
-    },
-    {
-        'name': 'Unreal Ocean',
-        'filename':  'UnrealOcean.mp3',
-    }
-]
 
 class Sleeper:
 
     def __init__(self):
         self.now = datetime.datetime.now()
         self.play('PrimevalForest.mp3')
+        self.play_process = ''
 
     # def init_GPIO(self):
     #     GPIO.setmode(GPIO.BCM)
@@ -76,8 +62,10 @@ class Sleeper:
     def play(self, filename):
         full_path = TRACKLOCATION + filename
         print('starting track')
-        play_process = subprocess.Popen(['omxplayer', '--no-keys', full_path], stdin=subprocess.PIPE, stdout=subprocess.PIPE, stderr=subprocess.PIPE, close_fds=True)
-        print('playing track - pid={}'.format(play_process))
+        self.play_process = subprocess.Popen(['omxplayer', full_path], stdin=subprocess.PIPE, stdout=subprocess.PIPE, stderr=subprocess.PIPE, close_fds=True)
+
+    def stop(self):
+        self.play_process.stdin.write('q')
 
     # def play_with_pygame(self, filename):
     #     full_path = TRACKLOCATION + filename
