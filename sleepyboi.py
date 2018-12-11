@@ -42,10 +42,11 @@ class Sleeper:
         self.start()
 
     def start(self):
-        self.play_next_song()
-        pygame.event.wait()
-        logger.error('Oops, an unhandled error occurred! Bye')
-        self.stop()
+            self.play_next_song()
+            while pygame.mixer.music.get_busy():
+                pygame.time.Clock().tick(10)
+            logger.error('Oops, an unhandled error occurred! Bye')
+            self.stop()
 
     # def init_buttons(self):
     #     pin_next_button = 1
