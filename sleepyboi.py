@@ -1,17 +1,11 @@
-import os
+from os import listdir
 import time
 import datetime
 import logging
 from pytz import timezone
 import subprocess
+
 # import RPi.GPIO as GPIO
-# import lcddriver
-
-# POWER_SWITCH_CHANNEL = 1
-# NEXT_SOUND_CHANNEL = 2
-# LCD_CHANNEL = 3
-
-# GPIO pins
 
 logging.basicConfig()
 logger = logging.getLogger(__name__)
@@ -22,25 +16,20 @@ formatter = logging.Formatter('%(asctime)s - %(name)s - %(levelname)s - %(messag
 handler.setFormatter(formatter)
 logger.addHandler(handler)
 
-# lcddisplay = lcddriver.lcd()
-
 pygame.mixer.init()
 player = pygame.mixer.music
 
-# on/off
-# toggle noises
-# volume
-
-TRACKSLOCATION = 'tracks/'
 # volume from 0.0 to 1.0
 MAX_VOLUME = 1.0
 
-TRACKS = [
-    'IrishCoast.mp3',
-    'LakeLife.mp3',
-    'PrimevalForest.mp3',
-    'UnrealOcean.mp3'
-]
+TRACKS = listdir("tracks/")
+
+# TRACKS = [
+#     'IrishCoast.mp3',
+#     'LakeLife.mp3',
+#     'PrimevalForest.mp3',
+#     'UnrealOcean.mp3'
+# ]
 
 class Sleeper:
 
@@ -56,45 +45,28 @@ class Sleeper:
         try:
             self.play_next_song()
         except:
-            logger.error('An unhandled error occured')
+            logger.error('Oops, an unhandled error occured! Bye')
+            self.stop()
 
+    def init_buttons():
+        pin_next_button = 1
+        pin_volume_up_button = 2
+        pin_volume_down_button = 3
 
-    def init_button():
+        GPIO.setmode(GPIO.BCM)
         GPIO.setup(pin_button, GPIO.IN, pull_up_down=GPIO.PUD_UP)
         GPIO.add_event_detect(pin_next_button, GPIO.FALLING, callback=next_pressed)
         GPIO.add_event_detect(pin_volume_up_button, GPIO.FALLING, callback=volume_up_button)
+        GPIO.add_event_detect(pin_volume_down_button, GPIO.FALLING, callback=volume_down_button)
 
     def next_pressed(channel):
         self.play_next_song()
 
-    def next_pressed(channel):
-        self.play_next_song()
+    def volume_up_button(channel):
+        self.volume_up()
 
-    def next_pressed(channel):
-        self.play_next_song()
-
-    # def init_GPIO(self):
-    #     GPIO.setmode(GPIO.BCM)
-    #     GPIO.setup(POWER_SWITCH_CHANNEL, GPIO.IN)
-    #     GPIO.setup(LCD_CHANNEL, GPIO.OUT)
-
-    # def clear_display(self):
-    #     lcddisplay.lcd_clear()
-
-    # def display(self, message, line):
-    #     self.clear_display()
-    #     lcddisplay.lcd_display_string(message, line)
-
-    # def play_with_omxplayer(self, filename):
-    #     if self.play_process:
-    #         self.stop()
-    #     full_path = TRACKLOCATION + filename
-    #     logger.info('Starting track - filename={}'.format(filename))
-    #     self.play_process = subprocess.Popen(['omxplayer', full_path], stdin=subprocess.PIPE, stdout=subprocess.PIPE, stderr=subprocess.PIPE, close_fds=True)
-
-    # def stop_with_omxplayer(self):
-    #     logger.info('Stopping player')
-    #     self.play_process.stdin.write('q')
+    def volume_down_button(channel):
+        self.volume_down()
 
     def play(self, filename):
         path = 'tracks/{}'.format(filename)
