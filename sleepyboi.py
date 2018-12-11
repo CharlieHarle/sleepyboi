@@ -45,7 +45,7 @@ class Sleeper:
         try:
             self.play_next_song()
         except:
-            logger.error('Oops, an unhandled error occured! Bye')
+            logger.error('Oops, an unhandled error occurred! Bye')
             self.stop()
 
     def init_buttons():
