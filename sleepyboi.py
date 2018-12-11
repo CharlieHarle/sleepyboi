@@ -16,7 +16,6 @@ formatter = logging.Formatter('%(asctime)s - %(name)s - %(levelname)s - %(messag
 handler.setFormatter(formatter)
 logger.addHandler(handler)
 
-pygame.init()
 pygame.mixer.init()
 player = pygame.mixer.music
 
@@ -71,8 +70,7 @@ class Sleeper:
     def play(self, filename):
         path = 'tracks/{}'.format(filename)
         player.load(path)
-        player.play(loops=-1)
-        pygame.event.wait()
+        player.play(-1)
         self.currently_playing = filename
         logger.info('Playing song - filename={}'.format(filename))
 
