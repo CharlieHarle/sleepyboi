@@ -44,6 +44,7 @@ class Sleeper:
     def start(self):
         try:
             self.play_next_song()
+            pygame.event.wait()
         except:
             logger.error('Oops, an unhandled error occurred! Bye')
             self.stop()
