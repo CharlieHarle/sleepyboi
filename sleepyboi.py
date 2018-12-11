@@ -42,8 +42,14 @@ class Sleeper:
         self.start()
 
     def start(self):
+        try:
             self.play_next_song()
-
+            while player.get_busy():
+                pygame.time.Clock().tick(10)
+        except KeyboardInterrupt:  # to stop playing, press "ctrl-c"
+            self.stop()
+            logger.info('Play Stopped by user')
+        except Exception:
             logger.error('Oops, an unhandled error occurred! Bye')
             self.stop()
 
