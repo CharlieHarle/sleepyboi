@@ -44,8 +44,11 @@ class Sleeper:
     def start(self):
         try:
             self.play_next_song()
-            while player.get_busy():
+            while True:
                 pygame.time.Clock().tick(10)
+                # if GPIO.event_detected(pin_next_button):
+                #   self.play_next_song()
+                # while player.get_busy():
         except KeyboardInterrupt:  # to stop playing, press "ctrl-c"
             self.stop()
             logger.info('Play Stopped by user')
@@ -65,6 +68,7 @@ class Sleeper:
     #     GPIO.add_event_detect(pin_volume_down_button, GPIO.FALLING, callback=volume_down_button)
 
     # def next_pressed(channel):
+    #     pygame.event.post( pygame.event.Event(pygame.USEREVENT, code='BUTTON' ))
     #     self.play_next_song()
 
     # def volume_up_button(channel):
