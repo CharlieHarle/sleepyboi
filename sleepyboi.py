@@ -38,7 +38,7 @@ class Sleeper:
         self.volume_interval = MAX_VOLUME / 10
         self.currently_playing = None
         self.number_of_songs = len(TRACKS)
-        self.init_buttons()
+        # self.init_buttons()
         self.start()
 
     def start(self):
@@ -48,25 +48,25 @@ class Sleeper:
             logger.error('Oops, an unhandled error occurred! Bye')
             self.stop()
 
-    def init_buttons():
-        pin_next_button = 1
-        pin_volume_up_button = 2
-        pin_volume_down_button = 3
+    # def init_buttons(self):
+    #     pin_next_button = 1
+    #     pin_volume_up_button = 2
+    #     pin_volume_down_button = 3
 
-        GPIO.setmode(GPIO.BCM)
-        GPIO.setup(pin_button, GPIO.IN, pull_up_down=GPIO.PUD_UP)
-        GPIO.add_event_detect(pin_next_button, GPIO.FALLING, callback=next_pressed)
-        GPIO.add_event_detect(pin_volume_up_button, GPIO.FALLING, callback=volume_up_button)
-        GPIO.add_event_detect(pin_volume_down_button, GPIO.FALLING, callback=volume_down_button)
+    #     GPIO.setmode(GPIO.BCM)
+    #     GPIO.setup(pin_button, GPIO.IN, pull_up_down=GPIO.PUD_UP)
+    #     GPIO.add_event_detect(pin_next_button, GPIO.FALLING, callback=next_pressed)
+    #     GPIO.add_event_detect(pin_volume_up_button, GPIO.FALLING, callback=volume_up_button)
+    #     GPIO.add_event_detect(pin_volume_down_button, GPIO.FALLING, callback=volume_down_button)
 
-    def next_pressed(channel):
-        self.play_next_song()
+    # def next_pressed(channel):
+    #     self.play_next_song()
 
-    def volume_up_button(channel):
-        self.volume_up()
+    # def volume_up_button(channel):
+    #     self.volume_up()
 
-    def volume_down_button(channel):
-        self.volume_down()
+    # def volume_down_button(channel):
+    #     self.volume_down()
 
     def play(self, filename):
         path = 'tracks/{}'.format(filename)
