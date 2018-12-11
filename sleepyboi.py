@@ -16,6 +16,7 @@ formatter = logging.Formatter('%(asctime)s - %(name)s - %(levelname)s - %(messag
 handler.setFormatter(formatter)
 logger.addHandler(handler)
 
+pygame.init()
 pygame.mixer.init()
 player = pygame.mixer.music
 
@@ -43,8 +44,8 @@ class Sleeper:
 
     def start(self):
             self.play_next_song()
-            while pygame.mixer.music.get_busy():
-                pygame.time.Clock().tick(10)
+            pygame.event.wait()
+
             logger.error('Oops, an unhandled error occurred! Bye')
             self.stop()
 
