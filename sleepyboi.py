@@ -42,12 +42,10 @@ class Sleeper:
         self.start()
 
     def start(self):
-        try:
-            self.play_next_song()
-            pygame.event.wait()
-        except:
-            logger.error('Oops, an unhandled error occurred! Bye')
-            self.stop()
+        self.play_next_song()
+        pygame.event.wait()
+        logger.error('Oops, an unhandled error occurred! Bye')
+        self.stop()
 
     # def init_buttons(self):
     #     pin_next_button = 1
