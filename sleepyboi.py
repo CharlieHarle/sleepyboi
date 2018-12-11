@@ -44,7 +44,6 @@ class Sleeper:
 
     def start(self):
             self.play_next_song()
-            pygame.event.wait()
 
             logger.error('Oops, an unhandled error occurred! Bye')
             self.stop()
@@ -73,6 +72,7 @@ class Sleeper:
         path = 'tracks/{}'.format(filename)
         player.load(path)
         player.play(loops=-1)
+        pygame.event.wait()
         self.currently_playing = filename
         logger.info('Playing song - filename={}'.format(filename))
 
