@@ -4,7 +4,7 @@ import datetime
 import logging
 from pytz import timezone
 import subprocess
-
+import pygame
 # import RPi.GPIO as GPIO
 
 logging.basicConfig()
@@ -98,7 +98,7 @@ class Sleeper:
             player.set_volume(new_volume)
         logger.info('Volume set to {}%'.format(new_volume*100))
 
-    def reset_volume()
+    def reset_volume(self):
         default_volume = MAX_VOLUME / 2
         player.set_volume(default_volume)
         logger.info('Volume set to {}%'.format(default_volume*100))
