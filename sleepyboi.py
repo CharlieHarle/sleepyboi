@@ -43,6 +43,7 @@ class Sleeper:
 
     def start(self):
         try:
+            player.set_volume(1)
             self.play_next_song()
             while True:
                 pygame.time.Clock().tick(10)
