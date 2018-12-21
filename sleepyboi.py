@@ -57,6 +57,7 @@ class Sleeper:
             self.stop()
 
     def init_buttons(self):
+        logger.info('Initialising buttons ')
         pin_next_button = 16
     #     pin_volume_up_button = 2
     #     pin_volume_down_button = 3
@@ -66,6 +67,7 @@ class Sleeper:
         GPIO.add_event_detect(pin_next_button, GPIO.FALLING, callback=next_pressed)
     #     GPIO.add_event_detect(pin_volume_up_button, GPIO.FALLING, callback=volume_up_button)
     #     GPIO.add_event_detect(pin_volume_down_button, GPIO.FALLING, callback=volume_down_button)
+        logger.info('Buttons initialised')
 
     def next_pressed(channel):
         pygame.event.post( pygame.event.Event(pygame.USEREVENT, code='BUTTON' ))
