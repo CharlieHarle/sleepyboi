@@ -56,6 +56,10 @@ class Sleeper:
             logger.error('Oops, an unhandled error occurred! Bye')
             self.stop()
 
+    def next_pressed(channel):
+        pygame.event.post( pygame.event.Event(pygame.USEREVENT, code='BUTTON' ))
+        self.play_next_song()
+
     def init_buttons(self):
         logger.info('Initialising buttons ')
         pin_next_button = 16
@@ -68,10 +72,6 @@ class Sleeper:
     #     GPIO.add_event_detect(pin_volume_up_button, GPIO.FALLING, callback=volume_up_button)
     #     GPIO.add_event_detect(pin_volume_down_button, GPIO.FALLING, callback=volume_down_button)
         logger.info('Buttons initialised')
-
-    def next_pressed(channel):
-        pygame.event.post( pygame.event.Event(pygame.USEREVENT, code='BUTTON' ))
-        self.play_next_song()
 
     # def volume_up_button(channel):
     #     self.volume_up()
