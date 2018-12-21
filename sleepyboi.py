@@ -47,8 +47,9 @@ class Sleeper:
             while True:
                 time.sleep(0.25)
                 pygame.time.Clock().tick(10)
-                # if GPIO.event_detected(pin_next_button):
-                #   self.play_next_song()
+                if GPIO.event_detected(self.pin_next_button):
+                    logger.info('waaaaat')
+                    self.play_next_song()
                 # while player.get_busy():
         except KeyboardInterrupt:  # to stop playing, press "ctrl-c"
             self.stop()
@@ -64,7 +65,7 @@ class Sleeper:
 
     def init_buttons(self):
         logger.info('Initialising buttons ')
-        pin_next_button = 4
+        self.pin_next_button = 4
     #     pin_volume_up_button = 2
     #     pin_volume_down_button = 3
 
