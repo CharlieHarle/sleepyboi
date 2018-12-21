@@ -68,7 +68,7 @@ class Sleeper:
 
         GPIO.setmode(GPIO.BCM)
         GPIO.setup(pin_next_button, GPIO.IN, pull_up_down=GPIO.PUD_UP)
-        GPIO.add_event_detect(pin_next_button, GPIO.FALLING, callback=self.next_pressed
+        GPIO.add_event_detect(pin_next_button, GPIO.FALLING, callback=self.next_pressed)
     #     GPIO.add_event_detect(pin_volume_up_button, GPIO.FALLING, callback=volume_up_button)
     #     GPIO.add_event_detect(pin_volume_down_button, GPIO.FALLING, callback=volume_down_button)
         logger.info('Buttons initialised')
