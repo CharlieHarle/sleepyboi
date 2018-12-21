@@ -4,7 +4,7 @@ import datetime
 import logging
 import subprocess
 import pygame
-# import RPi.GPIO as GPIO
+import RPi.GPIO as GPIO
 
 logging.basicConfig()
 logger = logging.getLogger(__name__)
@@ -56,20 +56,20 @@ class Sleeper:
             logger.error('Oops, an unhandled error occurred! Bye')
             self.stop()
 
-    # def init_buttons(self):
-    #     pin_next_button = 1
+    def init_buttons(self):
+        pin_next_button = 16
     #     pin_volume_up_button = 2
     #     pin_volume_down_button = 3
 
-    #     GPIO.setmode(GPIO.BCM)
-    #     GPIO.setup(pin_button, GPIO.IN, pull_up_down=GPIO.PUD_UP)
-    #     GPIO.add_event_detect(pin_next_button, GPIO.FALLING, callback=next_pressed)
+        GPIO.setmode(GPIO.BCM)
+        GPIO.setup(pin_next_button, GPIO.IN, pull_up_down=GPIO.PUD_UP)
+        GPIO.add_event_detect(pin_next_button, GPIO.FALLING, callback=next_pressed)
     #     GPIO.add_event_detect(pin_volume_up_button, GPIO.FALLING, callback=volume_up_button)
     #     GPIO.add_event_detect(pin_volume_down_button, GPIO.FALLING, callback=volume_down_button)
 
-    # def next_pressed(channel):
-    #     pygame.event.post( pygame.event.Event(pygame.USEREVENT, code='BUTTON' ))
-    #     self.play_next_song()
+    def next_pressed(channel):
+        pygame.event.post( pygame.event.Event(pygame.USEREVENT, code='BUTTON' ))
+        self.play_next_song()
 
     # def volume_up_button(channel):
     #     self.volume_up()
