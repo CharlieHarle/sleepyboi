@@ -37,7 +37,7 @@ class Sleeper:
         self.volume_interval = MAX_VOLUME / 10
         self.currently_playing = None
         self.number_of_songs = len(TRACKS)
-        # self.init_buttons()
+        self.init_buttons()
         self.start()
 
     def start(self):
