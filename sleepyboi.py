@@ -2,7 +2,6 @@ from os import listdir
 import time
 import datetime
 import logging
-from pytz import timezone
 import subprocess
 import pygame
 # import RPi.GPIO as GPIO
@@ -10,7 +9,7 @@ import pygame
 logging.basicConfig()
 logger = logging.getLogger(__name__)
 logger.setLevel(logging.INFO)
-handler = logging.FileHandler('/home/pi/projects/sleepyboi/output.log')
+handler = logging.FileHandler('/home/sleepy/projects/sleepyboi/output.log')
 handler.setLevel(logging.INFO)
 formatter = logging.Formatter('%(asctime)s - %(name)s - %(levelname)s - %(message)s')
 handler.setFormatter(formatter)
