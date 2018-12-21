@@ -63,7 +63,7 @@ class Sleeper:
 
     def init_buttons(self):
         logger.info('Initialising buttons ')
-        pin_next_button = 16
+        pin_next_button = 4
     #     pin_volume_up_button = 2
     #     pin_volume_down_button = 3
 
@@ -116,6 +116,7 @@ class Sleeper:
         logger.info('Volume set to {}%'.format(default_volume*100))
 
     def stop(self):
+        GPIO.cleanup()
         player.stop()
         logger.info('Stopping player')
 
