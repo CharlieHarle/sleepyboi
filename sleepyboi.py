@@ -57,7 +57,8 @@ class Sleeper:
             self.stop()
 
     def next_pressed(channel):
-        pygame.event.post( pygame.event.Event(pygame.USEREVENT, code='BUTTON' ))
+        logger.info('NEXT PRESSED ')
+        pygame.event.post(pygame.event.Event(pygame.USEREVENT, code='BUTTON' ))
         self.play_next_song()
 
     def init_buttons(self):
