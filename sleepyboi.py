@@ -47,6 +47,10 @@ class Sleeper:
             self.play_next_song()
             while True:
                 time.sleep(0.25)
+                input_state = GPIO.input(self.pin_next_button)
+                if input_state == False:
+                    logger.info('waaaaat2?')
+
                 pygame.time.Clock().tick(10)
                 if GPIO.event_detected(self.pin_next_button):
                     logger.info('waaaaat')
@@ -68,7 +72,6 @@ class Sleeper:
         logger.info('Initialising buttons ')
     #     pin_volume_up_button = 2
     #     pin_volume_down_button = 3
-
         GPIO.setmode(GPIO.BCM)
         GPIO.setup(self.pin_next_button, GPIO.IN, pull_up_down=GPIO.PUD_UP)
         GPIO.add_event_detect(self.pin_next_button, GPIO.FALLING, callback=self.next_pressed)
