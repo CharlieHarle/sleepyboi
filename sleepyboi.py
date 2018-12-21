@@ -45,6 +45,7 @@ class Sleeper:
             player.set_volume(1)
             self.play_next_song()
             while True:
+                time.sleep(0.25)
                 pygame.time.Clock().tick(10)
                 # if GPIO.event_detected(pin_next_button):
                 #   self.play_next_song()
