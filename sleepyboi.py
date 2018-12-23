@@ -33,7 +33,7 @@ TRACKS = listdir("tracks/")
 class Sleeper:
 
     def __init__(self):
-        self.pin_next_button = 4
+        self.pin_next_button = 44
         self.now = datetime.datetime.now()
         self.volume_interval = MAX_VOLUME / 10
         self.currently_playing = None
