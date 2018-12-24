@@ -46,15 +46,15 @@ class Sleeper:
             player.set_volume(1)
             self.play_next_song()
             while True:
-                time.sleep(0.25)
-                input_state = GPIO.input(NEXT_PIN)
-                if input_state == False:
-                    logger.info('waaaaat2?')
+                # time.sleep(0.25)
+                # input_state = GPIO.input(NEXT_PIN)
+                # if input_state == False:
+                #     logger.info('waaaaat2?')
 
                 pygame.time.Clock().tick(10)
-                if GPIO.event_detected(NEXT_PIN):
-                    logger.info('waaaaat')
-                    self.play_next_song()
+                # if GPIO.event_detected(NEXT_PIN):
+                #     logger.info('waaaaat')
+                #     self.play_next_song()
                 # while player.get_busy():
         except KeyboardInterrupt:  # to stop playing, press "ctrl-c"
             self.stop()
