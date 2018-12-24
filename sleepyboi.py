@@ -18,6 +18,8 @@ logger.addHandler(handler)
 pygame.mixer.init()
 player = pygame.mixer.music
 
+NEXT_PIN = 4
+
 # volume from 0.0 to 1.0
 MAX_VOLUME = 1.0
 
@@ -33,12 +35,11 @@ TRACKS = listdir("tracks/")
 class Sleeper:
 
     def __init__(self):
-        self.pin_next_button = 44
         self.now = datetime.datetime.now()
+        self.init_buttons()
         self.volume_interval = MAX_VOLUME / 10
         self.currently_playing = None
         self.number_of_songs = len(TRACKS)
-        self.init_buttons()
         self.start()
 
     def start(self):
@@ -47,12 +48,12 @@ class Sleeper:
             self.play_next_song()
             while True:
                 time.sleep(0.25)
-                input_state = GPIO.input(self.pin_next_button)
+                input_state = GPIO.input(NEXT_PIN)
                 if input_state == False:
                     logger.info('waaaaat2?')
 
                 pygame.time.Clock().tick(10)
-                if GPIO.event_detected(self.pin_next_button):
+                if GPIO.event_detected(NEXT_PIN):
                     logger.info('waaaaat')
                     self.play_next_song()
                 # while player.get_busy():
@@ -70,20 +71,10 @@ class Sleeper:
 
     def init_buttons(self):
         logger.info('Initialising buttons ')
-    #     pin_volume_up_button = 2
-    #     pin_volume_down_button = 3
         GPIO.setmode(GPIO.BCM)
-        GPIO.setup(self.pin_next_button, GPIO.IN, pull_up_down=GPIO.PUD_UP)
-        GPIO.add_event_detect(self.pin_next_button, GPIO.FALLING, callback=self.next_pressed)
-    #     GPIO.add_event_detect(pin_volume_up_button, GPIO.FALLING, callback=volume_up_button)
-    #     GPIO.add_event_detect(pin_volume_down_button, GPIO.FALLING, callback=volume_down_button)
+        GPIO.setup(NEXT_PIN, GPIO.IN, pull_up_down=GPIO.PUD_UP)
+        GPIO.add_event_detect(NEXT_PIN, GPIO.FALLING, callback=self.next_pressed)
         logger.info('Buttons initialised')
-
-    # def volume_up_button(channel):
-    #     self.volume_up()
-
-    # def volume_down_button(channel):
-    #     self.volume_down()
 
     def play(self, filename):
         path = 'tracks/{}'.format(filename)
