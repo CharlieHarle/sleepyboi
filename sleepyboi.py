@@ -2,7 +2,6 @@ from os import listdir
 import time
 import datetime
 import logging
-import subprocess
 import pygame
 import RPi.GPIO as GPIO
 
