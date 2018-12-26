@@ -95,13 +95,13 @@ class Sleeper:
 
     def volume_up(self):
         new_volume = player.get_volume() + self.volume_interval
-        if 0.0 <= new_volume <= 1.0:
+        if 0.0 <= new_volume <= MAX_VOLUME:
             player.set_volume(new_volume)
         logger.info('Volume set to {}%'.format(new_volume*100))
 
     def volume_down(self):
         new_volume = player.get_volume() - self.volume_interval
-        if 0.0 <= new_volume <= 1.0:
+        if 0.0 <= new_volume <= MAX_VOLUME:
             player.set_volume(new_volume)
         logger.info('Volume set to {}%'.format(new_volume*100))
 
