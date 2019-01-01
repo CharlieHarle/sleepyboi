@@ -19,7 +19,11 @@ player = pygame.mixer.music
 
 GPIO.setmode(GPIO.BCM)
 NEXT_PIN = 20
+VOL_UP_PIN = 19
+VOL_DOWN_PIN = 12
 GPIO.setup(NEXT_PIN, GPIO.IN, pull_up_down=GPIO.PUD_UP)
+GPIO.setup(VOL_UP_PIN, GPIO.IN, pull_up_down=GPIO.PUD_UP)
+GPIO.setup(VOL_DOWN_PIN, GPIO.IN, pull_up_down=GPIO.PUD_UP)
 
 # volume from 0.0 to 1.0
 MAX_VOLUME = 1.0
@@ -48,15 +52,7 @@ class Sleeper:
             player.set_volume(1)
             self.play_next_song()
             while True:
-                # time.sleep(0.25)
-                input_state = GPIO.input(NEXT_PIN)
-                if input_state == False:
-                    logger.info('noob way done :/')
-
                 pygame.time.Clock().tick(10)
-                # if GPIO.event_detected(NEXT_PIN):
-                #     logger.info('waaaaat')
-                #     self.play_next_song()
                 # while player.get_busy():
         except KeyboardInterrupt:  # to stop playing, press "ctrl-c"
             self.stop()
@@ -68,10 +64,13 @@ class Sleeper:
     def next_pressed(self, channel):
         logger.info('NEXT PRESSED :)')
         self.play_next_song()
+        time.sleep(0.1)
 
     def init_buttons(self):
         logger.info('Initialising buttons ')
         GPIO.add_event_detect(NEXT_PIN, GPIO.FALLING, callback=self.next_pressed)
+        GPIO.add_event_detect(VOL_UP_PIN, GPIO.FALLING, callback=self.volume_up)
+        GPIO.add_event_detect(VOL_DOWN_PIN, GPIO.FALLING, callback=self.volume_down)
         logger.info('Buttons initialised')
 
     def play(self, filename):
@@ -92,13 +91,13 @@ class Sleeper:
         next_song = TRACKS[0]
         self.play(next_song)
 
-    def volume_up(self):
+    def volume_up(self, channel):
         new_volume = player.get_volume() + self.volume_interval
         if 0.0 <= new_volume <= MAX_VOLUME:
             player.set_volume(new_volume)
         logger.info('Volume set to {}%'.format(new_volume*100))
 
-    def volume_down(self):
+    def volume_down(self, channel):
         new_volume = player.get_volume() - self.volume_interval
         if 0.0 <= new_volume <= MAX_VOLUME:
             player.set_volume(new_volume)
