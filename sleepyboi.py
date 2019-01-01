@@ -18,9 +18,9 @@ pygame.mixer.init()
 player = pygame.mixer.music
 
 GPIO.setmode(GPIO.BCM)
-NEXT_PIN = 20
-VOL_UP_PIN = 19
-VOL_DOWN_PIN = 12
+NEXT_PIN = 18
+VOL_UP_PIN = 24
+VOL_DOWN_PIN = 23
 GPIO.setup(NEXT_PIN, GPIO.IN, pull_up_down=GPIO.PUD_UP)
 GPIO.setup(VOL_UP_PIN, GPIO.IN, pull_up_down=GPIO.PUD_UP)
 GPIO.setup(VOL_DOWN_PIN, GPIO.IN, pull_up_down=GPIO.PUD_UP)
