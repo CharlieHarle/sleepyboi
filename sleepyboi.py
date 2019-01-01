@@ -67,9 +67,9 @@ class Sleeper:
 
     def init_buttons(self):
         logger.info('Initialising buttons ')
-        GPIO.add_event_detect(NEXT_PIN, GPIO.FALLING, callback=self.next_pressed)
-        GPIO.add_event_detect(VOL_UP_PIN, GPIO.FALLING, callback=self.volume_up)
-        GPIO.add_event_detect(VOL_DOWN_PIN, GPIO.FALLING, callback=self.volume_down)
+        GPIO.add_event_detect(NEXT_PIN, GPIO.FALLING, callback=self.next_pressed, bouncetime=200)
+        GPIO.add_event_detect(VOL_UP_PIN, GPIO.FALLING, callback=self.volume_up, bouncetime=200)
+        GPIO.add_event_detect(VOL_DOWN_PIN, GPIO.FALLING, callback=self.volume_down, bouncetime=200)
         logger.info('Buttons initialised')
 
     def play(self, filename):
@@ -91,12 +91,12 @@ class Sleeper:
         self.play(next_song)
 
     def volume_up(self, channel):
+        new_volume = player.get_volume() + self.volume_interval
         print(MAX_VOLUME)
         print(self.volume_interval)
         print(player.get_volume)
         print(new_volume)
         print(new_volume*100)
-        new_volume = player.get_volume() + self.volume_interval
         if 0.0 <= new_volume <= MAX_VOLUME:
             player.set_volume(new_volume)
         logger.info('Volume set to {}%'.format(new_volume*100))
