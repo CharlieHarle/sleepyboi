@@ -91,6 +91,11 @@ class Sleeper:
         self.play(next_song)
 
     def volume_up(self, channel):
+        print(MAX_VOLUME)
+        print(self.volume_interval)
+        print(player.get_volume)
+        print(new_volume)
+        print(new_volume*100)
         new_volume = player.get_volume() + self.volume_interval
         if 0.0 <= new_volume <= MAX_VOLUME:
             player.set_volume(new_volume)
