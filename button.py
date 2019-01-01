@@ -4,7 +4,7 @@ import time
 GPIO.setmode(GPIO.BCM)
 
 
-PIN_NUMBER = 28
+PIN_NUMBER = 20
 
 GPIO.setup(PIN_NUMBER, GPIO.IN, pull_up_down=GPIO.PUD_UP)
 
