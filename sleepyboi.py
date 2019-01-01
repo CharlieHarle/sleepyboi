@@ -92,20 +92,17 @@ class Sleeper:
 
     def volume_up(self, channel):
         new_volume = player.get_volume() + self.volume_interval
-        print(MAX_VOLUME)
-        print(self.volume_interval)
-        print(player.get_volume())
-        print(new_volume)
-        print(new_volume*100)
-        if 0.0 <= new_volume <= MAX_VOLUME:
-            player.set_volume(new_volume)
-        logger.info('Volume set to {}%'.format(new_volume*100))
+        rounded_new_volume = round(new_volume, 1)
+        if 0.0 <= rounded_new_volume <= MAX_VOLUME:
+            player.set_volume(rounded_new_volume)
+        logger.info('Volume set to {}%'.format(rounded_new_volume*100))
 
     def volume_down(self, channel):
         new_volume = player.get_volume() - self.volume_interval
-        if 0.0 <= new_volume <= MAX_VOLUME:
+        rounded_new_volume = round(new_volume, 1)
+        if 0.0 <= rounded_new_volume <= MAX_VOLUME:
             player.set_volume(new_volume)
-        logger.info('Volume set to {}%'.format(new_volume*100))
+        logger.info('Volume set to {}%'.format(rounded_new_volume*100))
 
     def reset_volume(self):
         default_volume = MAX_VOLUME / 2
