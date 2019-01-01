@@ -17,7 +17,9 @@ logger.addHandler(handler)
 pygame.mixer.init()
 player = pygame.mixer.music
 
-NEXT_PIN = 4
+GPIO.setmode(GPIO.BCM)
+NEXT_PIN = 20
+GPIO.setup(NEXT_PIN, GPIO.IN, pull_up_down=GPIO.PUD_UP)
 
 # volume from 0.0 to 1.0
 MAX_VOLUME = 1.0
@@ -35,7 +37,7 @@ class Sleeper:
 
     def __init__(self):
         self.now = datetime.datetime.now()
-        # self.init_buttons()
+        self.init_buttons()
         self.volume_interval = MAX_VOLUME / 10
         self.currently_playing = None
         self.number_of_songs = len(TRACKS)
@@ -47,9 +49,9 @@ class Sleeper:
             self.play_next_song()
             while True:
                 # time.sleep(0.25)
-                # input_state = GPIO.input(NEXT_PIN)
-                # if input_state == False:
-                #     logger.info('waaaaat2?')
+                input_state = GPIO.input(NEXT_PIN)
+                if input_state == False:
+                    logger.info('noob way done :/')
 
                 pygame.time.Clock().tick(10)
                 # if GPIO.event_detected(NEXT_PIN):
@@ -64,14 +66,11 @@ class Sleeper:
             self.stop()
 
     def next_pressed(channel):
-        logger.info('NEXT PRESSED ')
-        pygame.event.post(pygame.event.Event(pygame.USEREVENT, code='BUTTON' ))
+        logger.info('NEXT PRESSED :)')
         self.play_next_song()
 
     def init_buttons(self):
         logger.info('Initialising buttons ')
-        GPIO.setmode(GPIO.BCM)
-        GPIO.setup(NEXT_PIN, GPIO.IN, pull_up_down=GPIO.PUD_UP)
         GPIO.add_event_detect(NEXT_PIN, GPIO.FALLING, callback=self.next_pressed)
         logger.info('Buttons initialised')
 
