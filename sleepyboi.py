@@ -28,7 +28,7 @@ GPIO.setup(VOL_DOWN_PIN, GPIO.IN, pull_up_down=GPIO.PUD_UP)
 # volume from 0.0 to 1.0
 MAX_VOLUME = 1.0
 
-TRACKS = listdir("tracks/")
+TRACKS = listdir("/home/sleepy/projects/sleepyboi/tracks/")
 
 # TRACKS = [
 #     'IrishCoast.mp3',
