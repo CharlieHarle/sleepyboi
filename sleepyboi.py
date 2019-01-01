@@ -94,7 +94,7 @@ class Sleeper:
         new_volume = player.get_volume() + self.volume_interval
         print(MAX_VOLUME)
         print(self.volume_interval)
-        print(player.get_volume)
+        print(player.get_volume())
         print(new_volume)
         print(new_volume*100)
         if 0.0 <= new_volume <= MAX_VOLUME:
