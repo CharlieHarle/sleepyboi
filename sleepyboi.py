@@ -62,7 +62,7 @@ class Sleeper:
             self.stop()
 
     def next_pressed(self, channel):
-        logger.info('NEXT PRESSED :)')
+        logger.info('Skip to next song')
         self.play_next_song()
 
     def init_buttons(self):
@@ -94,15 +94,19 @@ class Sleeper:
         new_volume = player.get_volume() + self.volume_interval
         rounded_new_volume = round(new_volume, 1)
         if 0.0 <= rounded_new_volume <= MAX_VOLUME:
-            player.set_volume(rounded_new_volume)
-        logger.info('Volume set to {}%'.format(rounded_new_volume*100))
+            player.set_volume(new_volume)
+            logger.info('Volume set to {}%'.format(rounded_new_volume*100))
+        else:
+        logger.info('Volume already at {}%'.format(rounded_new_volume*100))
 
     def volume_down(self, channel):
         new_volume = player.get_volume() - self.volume_interval
         rounded_new_volume = round(new_volume, 1)
         if 0.0 <= rounded_new_volume <= MAX_VOLUME:
             player.set_volume(new_volume)
-        logger.info('Volume set to {}%'.format(rounded_new_volume*100))
+            logger.info('Volume set to {}%'.format(rounded_new_volume*100))
+        else:
+        logger.info('Volume already at {}%'.format(rounded_new_volume*100))
 
     def reset_volume(self):
         default_volume = MAX_VOLUME / 2
