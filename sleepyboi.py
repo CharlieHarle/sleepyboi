@@ -64,7 +64,6 @@ class Sleeper:
     def next_pressed(self, channel):
         logger.info('NEXT PRESSED :)')
         self.play_next_song()
-        time.sleep(0.1)
 
     def init_buttons(self):
         logger.info('Initialising buttons ')
