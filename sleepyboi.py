@@ -65,7 +65,7 @@ class Sleeper:
             logger.error('Oops, an unhandled error occurred! Bye')
             self.stop()
 
-    def next_pressed(channel):
+    def next_pressed(self, channel):
         logger.info('NEXT PRESSED :)')
         self.play_next_song()
 
