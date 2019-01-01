@@ -97,7 +97,7 @@ class Sleeper:
             player.set_volume(new_volume)
             logger.info('Volume set to {}%'.format(rounded_new_volume*100))
         else:
-            logger.info('Volume already at {}%'.format(rounded_new_volume*100))
+            logger.info('Volume already at {}%'.format(player.get_volume()*100))
 
     def volume_down(self, channel):
         new_volume = player.get_volume() - self.volume_interval
@@ -106,7 +106,7 @@ class Sleeper:
             player.set_volume(new_volume)
             logger.info('Volume set to {}%'.format(rounded_new_volume*100))
         else:
-            logger.info('Volume already at {}%'.format(rounded_new_volume*100))
+            logger.info('Volume already at {}%'.format(player.get_volume()*100))
 
     def reset_volume(self):
         default_volume = MAX_VOLUME / 2
