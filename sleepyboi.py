@@ -28,7 +28,8 @@ GPIO.setup(VOL_DOWN_PIN, GPIO.IN, pull_up_down=GPIO.PUD_UP)
 # volume from 0.0 to 1.0
 MAX_VOLUME = 1.0
 
-TRACKS = listdir("/home/sleepy/projects/sleepyboi/tracks/")
+TRACK_PATH = "/home/sleepy/projects/sleepyboi/tracks/"
+TRACKS = listdir(TRACK_PATH)
 
 # TRACKS = [
 #     'IrishCoast.mp3',
@@ -73,7 +74,7 @@ class Sleeper:
         logger.info('Buttons initialised')
 
     def play(self, filename):
-        path = '{}{}'.format(TRACKS, filename)
+        path = '{}{}'.format(TRACK_PATH, filename)
         player.load(path)
         player.play(-1)
         self.currently_playing = filename
