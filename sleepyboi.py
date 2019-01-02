@@ -57,8 +57,8 @@ class Sleeper:
         except KeyboardInterrupt:  # to stop playing, press "ctrl-c"
             self.stop()
             logger.info('Play Stopped by user')
-        except Exception:
-            logger.error('Oops, an unhandled error occurred! Bye')
+        except Exception as e:
+            logger.error('Oops, an unhandled error occurred! Bye - {}'.format(e))
             self.stop()
 
     def next_pressed(self, channel):
