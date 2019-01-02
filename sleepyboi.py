@@ -73,7 +73,7 @@ class Sleeper:
         logger.info('Buttons initialised')
 
     def play(self, filename):
-        path = 'tracks/{}'.format(filename)
+        path = '{}{}'.format(TRACKS, filename)
         player.load(path)
         player.play(-1)
         self.currently_playing = filename
