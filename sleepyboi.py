@@ -1,3 +1,6 @@
+
+# MAGIC
+
 from os import listdir
 import time
 import datetime
