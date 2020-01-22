@@ -1,6 +1,6 @@
 from os import listdir
+from datetime import datetime, timedelta
 import time
-import datetime
 import logging
 import pygame
 import RPi.GPIO as GPIO
@@ -41,7 +41,7 @@ TRACKS = listdir(TRACK_PATH)
 class Sleeper:
 
     def __init__(self):
-        self.now = datetime.datetime.now()
+        self.end_by_time = datetime.now() + timedelta(minutes=1)
         self.init_buttons()
         self.volume_interval = MAX_VOLUME / 10
         self.currently_playing = None
@@ -52,9 +52,10 @@ class Sleeper:
         try:
             player.set_volume(1)
             self.play_next_song()
-            while True:
+            while datetime.now() < self.end_by_time:
                 pygame.time.Clock().tick(10)
                 # while player.get_busy():
+            self.stop()
         except KeyboardInterrupt:  # to stop playing, press "ctrl-c"
             self.stop()
             logger.info('Play Stopped by user')
