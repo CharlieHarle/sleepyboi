@@ -31,6 +31,8 @@ MAX_VOLUME = 1.0
 TRACK_PATH = "/home/sleepy/projects/sleepyboi/tracks/"
 TRACKS = listdir(TRACK_PATH)
 
+LIFESPAN = timedelta(minutes=1)
+
 # TRACKS = [
 #     'IrishCoast.mp3',
 #     'LakeLife.mp3',
@@ -41,7 +43,7 @@ TRACKS = listdir(TRACK_PATH)
 class Sleeper:
 
     def __init__(self):
-        self.end_by_time = datetime.now() + timedelta(minutes=1)
+        self.end_by_time = datetime.now() + LIFESPAN
         self.init_buttons()
         self.volume_interval = MAX_VOLUME / 10
         self.currently_playing = None
@@ -65,7 +67,7 @@ class Sleeper:
 
     def extend_lifespan(self):
         logger.info('Extending lifespan by 1 minute')
-        self.end_by_time = datetime.now() + timedelta(minutes=1)
+        self.end_by_time = datetime.now() + LIFESPAN
 
     def next_pressed(self, channel):
         logger.info('Skip to next song')
@@ -124,6 +126,8 @@ class Sleeper:
 
     def stop(self):
         player.stop()
+        pygame.mixer.stop()
+        pygame.mixer.quit()
         GPIO.cleanup()
         logger.info('Stopping player')
 
