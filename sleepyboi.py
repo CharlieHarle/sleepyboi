@@ -63,7 +63,7 @@ class Sleeper:
             logger.error('Oops, an unhandled error occurred! Bye - {}'.format(e))
             self.stop()
 
-    def extend_lifespan(self, channel):
+    def extend_lifespan(self):
         logger.info('Extending lifespan by 1 minute')
         self.end_by_time = datetime.now() + timedelta(minutes=1)
 
