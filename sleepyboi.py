@@ -123,8 +123,8 @@ class Sleeper:
         logger.info('Volume set to {}%'.format(default_volume*100))
 
     def stop(self):
-        GPIO.cleanup()
         player.stop()
+        GPIO.cleanup()
         logger.info('Stopping player')
 
 if __name__ == '__main__':
