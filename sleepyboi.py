@@ -1,6 +1,3 @@
-
-# MAGIC
-
 from os import listdir
 import time
 import datetime
@@ -125,3 +122,5 @@ class Sleeper:
 if __name__ == '__main__':
     logger.info('Starting sleepyboi')
     Sleeper()
+
+# Yas?
