@@ -63,8 +63,13 @@ class Sleeper:
             logger.error('Oops, an unhandled error occurred! Bye - {}'.format(e))
             self.stop()
 
+    def extend_lifespan(self, channel):
+        logger.info('Extending lifespan by 1 minute')
+        self.end_by_time = datetime.now() + timedelta(minutes=1)
+
     def next_pressed(self, channel):
         logger.info('Skip to next song')
+        self.extend_lifespan()
         self.play_next_song()
 
     def init_buttons(self):
@@ -93,6 +98,7 @@ class Sleeper:
         self.play(next_song)
 
     def volume_up(self, channel):
+        self.extend_lifespan()
         new_volume = player.get_volume() + self.volume_interval
         rounded_new_volume = round(new_volume, 1)
         if 0.0 <= rounded_new_volume <= MAX_VOLUME:
@@ -102,6 +108,7 @@ class Sleeper:
             logger.info('Volume already at {}%'.format(player.get_volume()*100))
 
     def volume_down(self, channel):
+        self.extend_lifespan()
         new_volume = player.get_volume() - self.volume_interval
         rounded_new_volume = round(new_volume, 1)
         if 0.0 <= rounded_new_volume <= MAX_VOLUME:
